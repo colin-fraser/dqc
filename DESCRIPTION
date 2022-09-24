@@ -17,3 +17,5 @@ Imports:
     methods,
     purrr,
     tibble
+URL: https://github.com/colin-fraser/chex
+BugReports: https://github.com/colin-fraser/chex/issues
