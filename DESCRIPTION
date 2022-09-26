@@ -1,5 +1,5 @@
-Package: chex
-Title: Simple Data Integrity Checks
+Package: dqc
+Title: Simple Data Quality Checks
 Version: 0.0.0.9000
 Authors@R: 
     person("Colin", "Fraser", , "colin.r.fraser@gmail.com", role = c("aut", "cre"))
@@ -12,10 +12,12 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
+    cli,
     dplyr,
     magrittr,
     methods,
     purrr,
-    tibble
+    tibble,
+    utils
 URL: https://github.com/colin-fraser/chex
 BugReports: https://github.com/colin-fraser/chex/issues

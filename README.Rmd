@@ -13,19 +13,19 @@ knitr::opts_chunk$set(
 )
 ```
 
-# chex
+# Data Quality Checks
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of chex is to ...
+`{dqc}` aims to create a simple and intuitive data quality check API.
 
 ## Installation
 
-You can install the development version of chex like so:
+You can install the development version of `{dqc}` like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# devtools::install_github('colin-fraser/dqc')
 ```
 
 ## Example
@@ -33,12 +33,40 @@ You can install the development version of chex like so:
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(chex)
+library(dqc)
 
-chex <- list(
-  check_all(vs %in% c(0, 1)),
-  check_between(mpg, 0, 50)
+mtcars_check_suite <- dqc_suite(
+  check_between(mpg, 0, 40),
+  check_values_in(vs, c(0, 1))
 )
-check_runner(mtcars, chex)
+mtcars_check_suite(mtcars)
+```
 
+The `quick_checks` interface can be useful, especially when reading data in through a pipeline.
+
+```{r}
+df <- mtcars %>% 
+  quick_check(
+    check_between(mpg, 10, 30),
+    check_no_na(gear),
+    check_names(c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec", "vs", "am", 
+"gear", "carb"))
+  )
+```
+
+By default, `quick_check` informs you about data quality check failures but does not impede your work, returning its input without changes.
+
+```{r}
+head(df)
+```
+
+But this can be changed.
+
+```{r, error=TRUE}
+df <- mtcars %>% 
+  quick_check(
+    check_between(mpg, 10, 30),
+    check_no_na(gear),
+    .behavior = 'stop'
+  )
 ```
