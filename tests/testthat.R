@@ -1,4 +1,4 @@
 library(testthat)
-library(chex)
+library(dqc)
 
-test_check("chex")
+test_check("dqc")
