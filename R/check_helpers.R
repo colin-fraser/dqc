@@ -43,7 +43,7 @@ check_between <- function(col, lower, upper, lower_strict = TRUE, upper_strict =
   if (is.null(check_name)) {
     check_name <- paste(lower, left, deparse(substitute(col)), right, upper)
   }
-  check_all(getFunction(left)(lower, {{col}}) & methods::getFunction(right)({{col}}, upper),
+  check_all(methods::getFunction(left)(lower, {{col}}) & methods::getFunction(right)({{col}}, upper),
             check_name)
 }
 
@@ -54,7 +54,7 @@ check_between <- function(col, lower, upper, lower_strict = TRUE, upper_strict =
 #' @param strict strict comparison?
 #'
 #' @describeIn check_between Check that a column is less than a number
-#'
+#' @export
 #'
 check_less_than <- function(col, n, strict = TRUE) {
   if (strict) op <- '<' else op <- '<='

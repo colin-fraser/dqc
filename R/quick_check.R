@@ -17,12 +17,12 @@ quick_check <- function(.data, ..., .behavior = c('inform', 'warn', 'stop'),
   if (.quiet_pass & pass) {
     return(.data)
   }
-  dq_summary(result)
   if (!pass) {
     switch(.behavior,
            'inform' = message('Data quality checks failed'),
            'warn' = warning('Data quality checks failed'),
            'stop' = stop('Data quality checks failed'))
   }
+  dq_summary(result)
   .data
 }

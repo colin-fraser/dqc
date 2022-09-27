@@ -17,6 +17,7 @@ Imports:
     magrittr,
     methods,
     purrr,
+    rlang,
     tibble,
     utils
 URL: https://github.com/colin-fraser/dqc

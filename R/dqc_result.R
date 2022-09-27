@@ -3,16 +3,19 @@
 #' @param check_name the name of the check
 #' @param expected_output the expected output of the check
 #' @param check_passed did the check pass?
+#' @param error_message if an error was thrown, the content of the message
 #' @param ... currently unused
 #'
 #' @return a dqc_result object
 #' @export
 #'
-dqc_result <- function(check_name, expected_output, check_passed, ...) {
+dqc_result <- function(check_name, expected_output, check_passed,
+                       error_message, ...) {
   structure(list(
     check_name = check_name,
     expected_output = expected_output,
-    check_passed = check_passed
+    check_passed = check_passed,
+    error_message = error_message
   ), class = c('dqc_result', 'list'))
 }
 

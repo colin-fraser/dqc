@@ -6,7 +6,7 @@
 \alias{print.dqc_result}
 \title{The result of a Data Quality Check}
 \usage{
-dqc_result(check_name, expected_output, check_passed, ...)
+dqc_result(check_name, expected_output, check_passed, error_message, ...)
 
 \method{format}{dqc_result}(x, ...)
 
@@ -18,6 +18,8 @@ dqc_result(check_name, expected_output, check_passed, ...)
 \item{expected_output}{the expected output of the check}
 
 \item{check_passed}{did the check pass?}
+
+\item{error_message}{if an error was thrown, the content of the message}
 
 \item{...}{unused}
 

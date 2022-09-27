@@ -71,3 +71,22 @@ df <- mtcars %>%
     .behavior = 'stop'
   )
 ```
+
+If a data quality check throws an error, it warns you without stopping the workflow.
+
+```{r}
+error_thrower <- dqc("error thrower", function(x) stop('error on purpose!'))
+result <- error_thrower(mtcars)
+result$error_message
+```
+
+```{r}
+mtcars_check_suite <- dqc_suite(
+  check_between(mpg, 0, 40),
+  check_values_in(vs, c(0, 1)),
+  check_greater_than(non_existent_col, 1)  # throws an error
+)
+mtcars_check_suite(mtcars)
+```
+
+
