@@ -8,10 +8,9 @@
 dqc_suite <- function(...) {
   checks <- list(...)
   runner <- suite_runner(checks)
-  structure(runner, class = 'dqc_suite', checks = checks)
+  structure(runner, class = "dqc_suite", checks = checks)
 }
 
 suite_runner <- function(checks) {
   function(x) dqc_results(purrr::map(checks, ~ do.call(.x, list(x = x))))
 }
-

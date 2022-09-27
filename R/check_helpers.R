@@ -43,8 +43,10 @@ check_between <- function(col, lower, upper, lower_strict = TRUE, upper_strict =
   if (is.null(check_name)) {
     check_name <- paste(lower, left, deparse(substitute(col)), right, upper)
   }
-  check_all(getFunction(left)(lower, {{col}}) & methods::getFunction(right)({{col}}, upper),
-            check_name)
+  check_all(
+    methods::getFunction(left)(lower, {{ col }}) & methods::getFunction(right)({{ col }}, upper),
+    check_name
+  )
 }
 
 #' Check that a column is less than a number
@@ -54,12 +56,12 @@ check_between <- function(col, lower, upper, lower_strict = TRUE, upper_strict =
 #' @param strict strict comparison?
 #'
 #' @describeIn check_between Check that a column is less than a number
-#'
+#' @export
 #'
 check_less_than <- function(col, n, strict = TRUE) {
-  if (strict) op <- '<' else op <- '<='
+  if (strict) op <- "<" else op <- "<="
   check_name <- paste(deparse(substitute(col)), op, n)
-  check_between({{col}}, lower = -Inf, upper = n, upper_strict = strict, check_name = check_name)
+  check_between({{ col }}, lower = -Inf, upper = n, upper_strict = strict, check_name = check_name)
 }
 
 #' Check that a column is greater than a number
@@ -67,9 +69,9 @@ check_less_than <- function(col, n, strict = TRUE) {
 #' @describeIn check_between Check that a column is greater than a number
 #' @export
 check_greater_than <- function(col, n, strict = TRUE) {
-  if (strict) op <- '>' else op <- '>='
+  if (strict) op <- ">" else op <- ">="
   check_name <- paste(deparse(substitute(col)), op, n)
-  check_between({{col}}, lower = n, upper = Inf, lower_strict = strict, check_name = check_name)
+  check_between({{ col }}, lower = n, upper = Inf, lower_strict = strict, check_name = check_name)
 }
 
 
@@ -83,7 +85,7 @@ check_greater_than <- function(col, n, strict = TRUE) {
 #'
 check_values_in <- function(col, values) {
   values_rep <- utils::capture.output(dput(values))
-  check_name <- paste(deparse(substitute(col)), '%in%', values_rep)
+  check_name <- paste(deparse(substitute(col)), "%in%", values_rep)
   check_all({{ col }} %in% values, check_name)
 }
 
