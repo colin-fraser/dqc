@@ -109,3 +109,14 @@ check_no_na <- function(col) {
 check_names <- function(expected_names) {
   dqc("names are expected", function(x) all(names(x) == expected_names))
 }
+
+#' Check that a column is not duplicated
+#'
+#' @param col column to check
+#'
+#' @return a dqc object
+#' @export
+#'
+check_no_duplicates <- function(col) {
+  check_all(!duplicated({{ col }}), paste0("!duplicated(", deparse(substitute(col)), ")"))
+}
