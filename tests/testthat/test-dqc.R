@@ -10,5 +10,4 @@ test_that("dqc fails gracefully when columns don't exist", {
   check <- check_between(abc, 0, 100)
   expect_warning(check(mtcars), regexp = "A data quality check threw an error")
   expect_equal(check(mtcars)$error_message, "object 'abc' not found")
-}
-)
+})

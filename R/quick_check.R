@@ -8,7 +8,7 @@
 #' @return .data, unchanged
 #' @export
 #'
-quick_check <- function(.data, ..., .behavior = c('inform', 'warn', 'stop'),
+quick_check <- function(.data, ..., .behavior = c("inform", "warn", "stop"),
                         .quiet_pass = FALSE) {
   .behavior <- match.arg(.behavior)
   check_suite <- dqc_suite(...)
@@ -19,9 +19,10 @@ quick_check <- function(.data, ..., .behavior = c('inform', 'warn', 'stop'),
   }
   if (!pass) {
     switch(.behavior,
-           'inform' = message('Data quality checks failed'),
-           'warn' = warning('Data quality checks failed'),
-           'stop' = stop('Data quality checks failed'))
+      "inform" = message("Data quality checks failed"),
+      "warn" = warning("Data quality checks failed"),
+      "stop" = stop("Data quality checks failed")
+    )
   }
   dq_summary(result)
   .data

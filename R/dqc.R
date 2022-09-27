@@ -20,10 +20,11 @@ dqc <- function(check_name, f, expected_output = TRUE) {
           cli::cli_abort("Malformed data quality check `{check_name}`: should return a vector of length 1")
         }
         NA
-      })
+      }
+    )
     dqc_result(check_name, expected_output, check_passed, error_message = error_message)
   }
-  structure(checker, class = 'dqc', name = check_name)
+  structure(checker, class = "dqc", name = check_name)
 }
 
 
@@ -49,12 +50,12 @@ format.dqc <- function(x, ...) {
 #' @rdname dqc
 #' @export
 print.dqc <- function(x, ...) {
-  cat(paste0(format(x), '\n'))
+  cat(paste0(format(x), "\n"))
   invisible(x)
 }
 
 dqc_name <- function(x) {
-  attr(x, 'name')
+  attr(x, "name")
 }
 
-dummy_check <- dqc('is data frame', is.data.frame) # for testing
+dummy_check <- dqc("is data frame", is.data.frame) # for testing
