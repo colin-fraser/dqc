@@ -13,7 +13,7 @@
 check_all <- function(condition, check_name = NULL) {
   f <- function(x) {
     result_data <- x %>%
-      mutate(.chex = {{ condition }})
+      dplyr::mutate(.chex = {{ condition }})
     all(result_data$.chex)
   }
   if (is.null(check_name)) {
@@ -43,7 +43,7 @@ check_between <- function(col, lower, upper, lower_strict = TRUE, upper_strict =
   if (is.null(check_name)) {
     check_name <- paste(lower, left, deparse(substitute(col)), right, upper)
   }
-  check_all(getFunction(left)(lower, {{col}}) & getFunction(right)({{col}}, upper),
+  check_all(getFunction(left)(lower, {{col}}) & methods::getFunction(right)({{col}}, upper),
             check_name)
 }
 
@@ -82,7 +82,7 @@ check_greater_than <- function(col, n, strict = TRUE) {
 #' @export
 #'
 check_values_in <- function(col, values) {
-  values_rep <- capture.output(dput(values))
+  values_rep <- utils::capture.output(dput(values))
   check_name <- paste(deparse(substitute(col)), '%in%', values_rep)
   check_all({{ col }} %in% values, check_name)
 }
@@ -108,4 +108,15 @@ check_no_na <- function(col) {
 #'
 check_names <- function(expected_names) {
   dqc("names are expected", function(x) all(names(x) == expected_names))
+}
+
+#' Check that a column is not duplicated
+#'
+#' @param col column to check
+#'
+#' @return a dqc object
+#' @export
+#'
+check_no_duplicates <- function(col) {
+  check_all(!duplicated({{ col }}), paste0("!duplicated(", deparse(substitute(col)), ")"))
 }

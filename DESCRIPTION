@@ -19,5 +19,5 @@ Imports:
     purrr,
     tibble,
     utils
-URL: https://github.com/colin-fraser/chex
-BugReports: https://github.com/colin-fraser/chex/issues
+URL: https://github.com/colin-fraser/dqc
+BugReports: https://github.com/colin-fraser/dqc/issues
